@@ -1,36 +1,34 @@
+// Define a jobs array to hold all of our jobs
+const jobs = []
+
 const express = require('express');
 const router = express.Router();
 
-const JobModel = require('./jobModel'); 
-const jobService = require('./jobService');
-
-// GET /jobs/
 router.route('/')
-    .get(async (req, res, next) => {
-        try {
-            const jobs = await jobService.listJobs();
-            res.status(200).send({
-                data: jobs
-            });
-
-        } catch (e) {
-            next(e);
-        }
+    .get((req, res) => {
+        // 1. Respond with array jobs.
+        res.status(200).send({
+            data: jobs
+        });
     });
 
 router.route('/add')
-    .post(async (req, res, next) => {
+    .post((req, res) => {
+        // 1. Grab the new job information from the request body.
         const { title, company, link } = req.body;
-        try {
-            const job = new JobModel({ title, company, link });
-            const doc = await job.save(); 
-            
-            res.status(201).json({
-                data: [doc]
-            });
-        } catch (e) {
-            next(e);
-        }
+
+        // 2. Push the job to our job array
+        jobs.push({
+            title: title,
+            company: company,
+            link: link
+        });
+
+        // 3. Respond with the updated jobs array.
+        res.status(200).send({
+            data: jobs
+        });
     });
 
+// Export the router
 exports.router = router;

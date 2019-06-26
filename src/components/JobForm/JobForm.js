@@ -49,10 +49,11 @@ function FormDialog({ addJob }) {
         company: jobCompany,
         link: jobLink
       });
-      jobData.then(results => {
-        addJob(results.data.data[0].title, results.data.data[0].company, results.data.data[0].link)
-        setOpen(false)
-      });
+      setOpen(false);
+      // jobData.then(results => {
+      //   addJob(results.data.data[0].title, results.data.data[0].company, results.data.data[0].link)
+      //   setOpen(false)
+      // });
     }
 
     return (
