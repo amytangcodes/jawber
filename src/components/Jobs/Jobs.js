@@ -57,10 +57,10 @@ export default function Jobs() {
   }
 
   useEffect(() => {
-    const jobData = axios.get('http://localhost:3000/api/jobs');
-    jobData.then(results => {
-      setJobs(results.data.data)
-    });
+    // const jobData = axios.get('http://localhost:3000/api/jobs');
+    // jobData.then(results => {
+    //   setJobs(results.data.data)
+    // });
   }, []);
 
   return (

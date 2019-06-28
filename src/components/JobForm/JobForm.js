@@ -44,12 +44,12 @@ function FormDialog({ addJob }) {
     }
 
     function handleAddJob() {
-      const jobData = axios.post('http://localhost:3000/api/jobs/add', {
-        title: jobTitle,
-        company: jobCompany,
-        link: jobLink
-      });
-      setOpen(false);
+      // const jobData = axios.post('http://localhost:3000/api/jobs/add', {
+      //   title: jobTitle,
+      //   company: jobCompany,
+      //   link: jobLink
+      // });
+      // setOpen(false);
       // jobData.then(results => {
       //   addJob(results.data.data[0].title, results.data.data[0].company, results.data.data[0].link)
       //   setOpen(false)
