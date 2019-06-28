@@ -5,7 +5,7 @@ Designed by the legendary Fatima.
 
 
 <img style="width:100px;" src="./images/shang.jpg" alt="Picture of Shang.">
-Name idea by the incomparable Shang.  
+Front end development & Name idea by the incomparable Shang.  
 
 
 <img style="width:100px;" src="./images/dan.jpg" alt="Picture of Dan.">
