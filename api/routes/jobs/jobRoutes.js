@@ -1,7 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
-const jobs = [];
+const jobs = [
+  {
+    title: "Time Traveller",
+    company: "Not Yet Invented",
+    link: "www.nowisthefuture.com"
+  }
+];
 
 router.route("/").get((req, res) => {
   // 1. Respond with the array of jobs

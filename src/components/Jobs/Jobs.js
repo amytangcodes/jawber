@@ -1,52 +1,46 @@
-import React, { useState, useEffect } from 'react';
-import JobForm from '../JobForm';
-import JobCard from '../JobCard';
-import axios from 'axios';
-import shark from '../../assets/logo.png';
-import { makeStyles } from '@material-ui/core/styles';
-import {
-    Container,
-    Typography,
-    CssBaseline,
-    Grid
-}
-from '@material-ui/core';
+import React, { useState, useEffect } from "react";
+import JobForm from "../JobForm";
+import JobCard from "../JobCard";
+import axios from "axios";
+import shark from "../../assets/logo.png";
+import { makeStyles } from "@material-ui/core/styles";
+import { Container, Typography, CssBaseline, Grid } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   heroText: {
-    clip: 'rect(0 0 0 0)',
-    position: 'absolute'
+    clip: "rect(0 0 0 0)",
+    position: "absolute"
   },
   heroSub: {
-    position: 'relative',
-    zIndex: '2',
-    top: '270px',
-    color: 'white',
-    fontSize: '29px',
-    letterSpacing: '1.5',
-    fontWeight: 'bold'
+    position: "relative",
+    zIndex: "2",
+    top: "270px",
+    color: "white",
+    fontSize: "29px",
+    letterSpacing: "1.5",
+    fontWeight: "bold"
   },
   heroContent: {
-    padding: theme.spacing(7, 0, 24),
+    padding: theme.spacing(7, 0, 24)
   },
   cardGrid: {
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
-    backgroundColor: '#6999D2',
+    backgroundColor: "#6999D2"
   },
   shark: {
-    display: 'flex',
-    justifyContent: 'center',
-    zIndex: '1',
-    '& img': {
-      position: 'absolute',
-      top: '40px',
-      width: '230px',
+    display: "flex",
+    justifyContent: "center",
+    zIndex: "1",
+    "& img": {
+      position: "absolute",
+      top: "40px",
+      width: "230px"
     }
-  },
+  }
 }));
 
-export default function Jobs() {
+const Jobs = () => {
   const classes = useStyles();
 
   const [jobs, setJobs] = useState([]);
@@ -54,13 +48,15 @@ export default function Jobs() {
   const addJob = (title, company, link) => {
     const newJob = [...jobs, { title, company, link }];
     setJobs(newJob);
-  }
+  };
 
+  // Using the new React Hooks API. This is lke componentDidMount
   useEffect(() => {
-    // const jobData = axios.get('http://localhost:3000/api/jobs');
-    // jobData.then(results => {
-    //   setJobs(results.data.data)
-    // });
+    // make call to /api/jobs here
+    const jobData = axios.get("http//localhost:3000/api/jobs");
+    jobData.then(results => {
+      setJobs(results.data.data);
+    });
   }, []);
 
   return (
@@ -68,29 +64,50 @@ export default function Jobs() {
       <CssBaseline />
       <main>
         <div className={classes.shark}>
-          <img src={shark} alt="Jaws Shark"/>
+          <img src={shark} alt="Jaws Shark" />
         </div>
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
-            <Typography className={classes.heroText} component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+            <Typography
+              className={classes.heroText}
+              component="h1"
+              variant="h2"
+              align="center"
+              color="textPrimary"
+              gutterBottom
+            >
               JAWBER
             </Typography>
-            <Typography className={classes.heroSub} variant="h5" align="center" color="textSecondary" paragraph>
+            <Typography
+              className={classes.heroSub}
+              variant="h5"
+              align="center"
+              color="textSecondary"
+              paragraph
+            >
               THE HUNT BEGINS
             </Typography>
           </Container>
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
           <JobForm addJob={addJob} />
+          <h1>List of Jobs</h1>
           <Grid container spacing={4}>
-            {jobs && jobs.map(job => (
-              <Grid item key={job._id} xs={12} sm={6} md={4}>
-                <JobCard title={job.title} company={job.company} link={job.link}/>
-              </Grid>
-            ))}
+            {jobs &&
+              jobs.map(job => (
+                <Grid item key={job._id} xs={12} sm={6} md={4}>
+                  <JobCard
+                    title={job.title}
+                    company={job.company}
+                    link={job.link}
+                  />
+                </Grid>
+              ))}
           </Grid>
         </Container>
       </main>
     </React.Fragment>
   );
-}
+};
+
+export default Jobs;
