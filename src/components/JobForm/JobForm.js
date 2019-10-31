@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import axios from 'axios';
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import axios from "axios";
 import {
-    Button,
-    TextField,
-    Grid,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle }
-from '@material-ui/core';
+  Button,
+  TextField,
+  Grid,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle
+} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   heroButtons: {
@@ -18,99 +18,108 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(5)
   },
   jobButton: {
-    background: '#376999',
-    borderRadius: '0',
-    color: 'white',
-    borderColor: 'transparent',
-    fontWeight: 'bold',
-    textTransform: 'lowercase'
-  },
+    background: "#376999",
+    borderRadius: "0",
+    color: "white",
+    borderColor: "transparent",
+    fontWeight: "bold",
+    textTransform: "lowercase"
+  }
 }));
 
-function FormDialog({ addJob }) {
-    const classes = useStyles();
+const FormDialog = ({ addJob }) => {
+  const classes = useStyles();
 
-    const [open, setOpen] = useState(false);
-    const [jobTitle, setJobTitle] = useState(null);
-    const [jobCompany, setJobCompany] = useState(null);
-    const [jobLink, setJobLink] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [jobTitle, setJobTitle] = useState(null);
+  const [jobCompany, setJobCompany] = useState(null);
+  const [jobLink, setJobLink] = useState(null);
 
-    function handleClickOpen() {
-      setOpen(true);
-    }
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-    function handleClose() {
-      setOpen(false);
-    }
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-    function handleAddJob() {
-      // const jobData = axios.post('http://localhost:3000/api/jobs/add', {
-      //   title: jobTitle,
-      //   company: jobCompany,
-      //   link: jobLink
-      // });
-      // setOpen(false);
-      // jobData.then(results => {
-      //   addJob(results.data.data[0].title, results.data.data[0].company, results.data.data[0].link)
-      //   setOpen(false)
-      // });
-    }
+  const handleAddJob = () => {
+    // const jobData = axios.post('http://localhost:3000/api/jobs/add', {
+    //   title: jobTitle,
+    //   company: jobCompany,
+    //   link: jobLink
+    // });
+    // setOpen(false);
+    // jobData.then(results => {
+    //   addJob(results.data.data[0].title, results.data.data[0].company, results.data.data[0].link)
+    //   setOpen(false)
+    // });
+  };
 
-    return (
-      <div>
-        <div className={classes.heroButtons}>
-            <Grid container spacing={2} justify="center">
-            <Grid item>
-                <Button className={classes.jobButton}variant="outlined" color="primary" onClick={handleClickOpen}>
-                    Add Job
-                </Button>
-            </Grid>
-            </Grid>
-        </div>
-
-        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-          <DialogTitle id="form-dialog-title">Add Job</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Add the details of the job that you applied for!
-            </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="title"
-              label="Job Title"
-              type="name"
-              onChange={(e) => setJobTitle(e.target.value)}
-              fullWidth
-            />
-            <TextField
-              margin="dense"
-              id="company"
-              label="Company"
-              type="name"
-              onChange={(e) => setJobCompany(e.target.value)}
-              fullWidth
-            />
-            <TextField
-              margin="dense"
-              id="link"
-              label="Link"
-              type="name"
-              onChange={(e) => setJobLink(e.target.value)}
-              fullWidth
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose} color="primary">
-              Cancel
+  return (
+    <div>
+      <div className={classes.heroButtons}>
+        <Grid container spacing={2} justify="center">
+          <Grid item>
+            <Button
+              className={classes.jobButton}
+              variant="outlined"
+              color="primary"
+              onClick={handleClickOpen}
+            >
+              Add Job
             </Button>
-            <Button onClick={handleAddJob} color="primary">
-              Add
-            </Button>
-          </DialogActions>
-        </Dialog>
+          </Grid>
+        </Grid>
       </div>
-    );
-  }
 
-  export default FormDialog;
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">Add Job</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Add the details of the job that you applied for!
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="title"
+            label="Job Title"
+            type="name"
+            onChange={e => setJobTitle(e.target.value)}
+            fullWidth
+          />
+          <TextField
+            margin="dense"
+            id="company"
+            label="Company"
+            type="name"
+            onChange={e => setJobCompany(e.target.value)}
+            fullWidth
+          />
+          <TextField
+            margin="dense"
+            id="link"
+            label="Link"
+            type="name"
+            onChange={e => setJobLink(e.target.value)}
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleAddJob} color="primary">
+            Add
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+};
+
+export default FormDialog;
