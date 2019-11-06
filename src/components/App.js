@@ -1,29 +1,53 @@
-import React, { Component } from 'react';
-import Jobs from './Jobs';
-import { createGlobalStyle }  from 'styled-components';
-import waves from '../assets/waves.png';
+import React, { Component } from "react";
+// import Jobs from "./Jobs";
+// import { createGlobalStyle } from "styled-components";
+// import waves from "../assets/waves.png";
 
-const GlobalStyle = createGlobalStyle`
-    body {
-        min-height: 100vh;
-        background-image:  url(${waves}),linear-gradient(180deg, rgba(139,240,252,1) 0%, #6999D2 25%);;
-        background-size: contain , cover;
-        background-position: center 200px, top left;
-        background-repeat: no-repeat, no-repeat;
-    }
-`
-
+import {
+  List,
+  ListItem,
+  ListItemText,
+  ListItemAvatar,
+  Avatar
+} from "@material-ui/core";
 
 class App extends Component {
+  constructor() {
+    super();
 
-    render() {
-        return (
-            <>
-                <GlobalStyle />
-                <Jobs />
-            </>
-        )
-    }
+    this.state = {
+      books: []
+    };
+  }
+
+  // Grab all the data from /api/routes/books.js
+  async componentDidMount() {
+    const result = await fetch("/books");
+    const data = await result.json();
+    const books = data.results;
+    console.log("books: ", books);
+    this.setState({ books });
+  }
+
+  render() {
+    const { books } = this.state;
+
+    return (
+      <div className="App">
+        <header className="App-header">
+          <List>
+            {books.map(book => {
+              return (
+                <ListItem key={book.id}>
+                  <ListItemText primary={book.name} secondary={book.author} />
+                </ListItem>
+              );
+            })}
+          </List>
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;
